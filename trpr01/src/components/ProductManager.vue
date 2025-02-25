@@ -25,7 +25,25 @@ const products = ref<Product[]>([
     <div class="container">
       <div class="row">
         <div class="col">
-          <ul>
+          <form>
+            <fieldset>
+              <h2>Ajouter un produit</h2>
+              <div class="row input">
+                <input
+                  type="text"
+                  id="newProductName"
+                  name="newProductName"
+                  placeholder="Nom"
+                  class="form-control"
+                />
+              </div>
+            </fieldset>
+          </form>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <ul class="list-group list-group-flush">
             <ProductItem
               v-for="product in products"
               :key="product.id"

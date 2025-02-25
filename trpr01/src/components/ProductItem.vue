@@ -6,8 +6,8 @@ const props = defineProps<{
 }>()
 </script>
 <template>
-  <li class="text-light">
-    {{ product.id }}
+  <li class="list-group-item bg-dark text-light">
+    {{ product.name }} ({{ product.id }})
   </li>
 </template>
 <style scoped></style>
