@@ -21,7 +21,7 @@ else stockColorIndicator.value = StockStatus.OUT
   <div class="accordion-item bg-dark">
     <h2 class="accordion-header">
       <button
-        class="accordion-button collapsed container"
+        class="accordion-button collapsed container text-light"
         type="button"
         data-bs-toggle="collapse"
         :data-bs-target="accordionIdLocator"
@@ -30,7 +30,7 @@ else stockColorIndicator.value = StockStatus.OUT
         :aria-controls="accordionId"
       >
         <div class="row">
-          <span class="col-6 fs-3">{{ product.name }}</span>
+          <span class="col-6 fs-3">{{ product.name }} ({{ product.id }})</span>
           <span
             class="bg-danger rounded justify-content-left col-6 text-light"
             v-if="stockColorIndicator === StockStatus.OUT"
@@ -70,10 +70,10 @@ else stockColorIndicator.value = StockStatus.OUT
           <div>
             <button
               type="button"
-              class="btn btn-info"
+              class="btn btn-secondary"
               @click="productDeletionConfirmation = false"
             >
-              Retour
+              Annuler
             </button>
             <button
               type="button"
@@ -91,4 +91,8 @@ else stockColorIndicator.value = StockStatus.OUT
     </div>
   </div>
 </template>
-<style scoped></style>
+<style scoped>
+.accordion-button {
+  background: rgb(33, 37, 41, 255);
+}
+</style>

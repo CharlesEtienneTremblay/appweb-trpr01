@@ -35,10 +35,8 @@ const products = ref<Product[]>([
   }
 ])
 
-const shownProducts = products
-
 function addProduct(values: [string, string, number, number]): void {
-  let nextId: number = products.value.length
+  let nextId: number = products.value.length + 1
 
   products.value.push({
     id: nextId,
@@ -55,13 +53,15 @@ function removeProduct(id: number): void {
 </script>
 <template>
   <main>
-    <div class="container">
+    <div class="container mt-5">
       <div class="row">
         <div class="col">
           <div class="accordion mb-5 bg-dark" id="productsList">
-            <h3>Produits</h3>
+            <div>
+              <h3 class="mt-3">Produits</h3>
+            </div>
             <ProductItem
-              v-for="product in shownProducts"
+              v-for="product in products"
               :key="product.id"
               :product="product"
               @delete:product="removeProduct($event)"

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue"
 import * as CONSTS from "../scripts/consts"
-import { type Product } from "../scripts/types"
+import type { RefSymbol } from "@vue/reactivity"
 
 const emits = defineEmits(["add:product"])
 
@@ -18,11 +18,11 @@ function validateName(): boolean {
 }
 
 function validatePrice(): boolean {
-  return newPrice.value < 0
+  return newPrice.value.toString() === "" || newPrice.value < 0
 }
 
 function validateStock(): boolean {
-  return newStock.value < 0
+  return newStock.value.toString() === "" || newStock.value < 0
 }
 
 function validateForm(): boolean {
@@ -52,13 +52,14 @@ function validateForm(): boolean {
   return isValid
 }
 
+//https://www.geeksforgeeks.org/how-to-convert-string-to-number-in-typescript/
 function sendForm(): void {
   if (validateForm()) {
     emits.call("add:product", "add:product", [
       newName.value,
       newDescription.value,
-      newPrice.value,
-      newStock.value
+      +newPrice.value.toFixed(2),
+      +newStock.value.toFixed(0)
     ])
     resetForm()
   }
@@ -75,7 +76,7 @@ function resetForm(): void {
 <template>
   <form novalidate>
     <fieldset class="border px-3 py-3 border-success rounded">
-      <h2>Ajouter un produit</h2>
+      <h2 class="text-success">Ajouter un produit</h2>
       <div class="row">
         <div class="col-6">
           <label for="newName" class="label-form">Nom</label>
