@@ -5,3 +5,9 @@ export interface Product{
     price:number
     stock:number
 }
+
+export enum StockStatus{
+    OK = "bg-success",
+    DANGER=  "bg-warning",
+    OUT = "bg-danger"
+}
