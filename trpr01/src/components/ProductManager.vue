@@ -20,6 +20,10 @@ const products = ref<Product[]>([
     stock: 8
   }
 ])
+
+function addProduct(newProduct: Product): void {
+  products.value.push(newProduct)
+}
 </script>
 <template>
   <main>
