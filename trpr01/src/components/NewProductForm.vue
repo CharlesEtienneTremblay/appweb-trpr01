@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { ref } from "vue"
 import * as CONSTS from "../scripts/consts"
+import { type Product } from "../scripts/types"
+
+const emits = defineEmits(["add:product"])
 
 const newName = ref<string>("")
 const newDescription = ref<string>("")
@@ -51,7 +54,12 @@ function validateForm(): boolean {
 
 function sendForm(): void {
   if (validateForm()) {
-    console.log("good")
+    emits.call("add:product", "add:product", [
+      newName.value,
+      newDescription.value,
+      newPrice.value,
+      newStock.value
+    ])
     resetForm()
   }
 }
