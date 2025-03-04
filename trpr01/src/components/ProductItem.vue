@@ -1,22 +1,32 @@
 <script setup lang="ts">
 import { type Product, StockStatus } from "../scripts/types"
-import { ref } from "vue"
+import { ref, watch } from "vue"
 
 const props = defineProps<{
   product: Product
   searchString: String
 }>()
 
-const emits = defineEmits(["delete:product"])
+const emits = defineEmits(["delete:product", "update:productToModify"])
 
 const accordionId: string = "accordion" + props.product.id
 const accordionIdLocator: string = "#" + accordionId
-const stockColorIndicator = ref<StockStatus>()
+const stockStatus = ref<StockStatus>()
+pickStockColorIndicator()
 const productDeletionConfirmation = ref<boolean>(false)
 
-if (props.product.stock >= 5) stockColorIndicator.value = StockStatus.OK
-else if (props.product.stock > 0) stockColorIndicator.value = StockStatus.DANGER
-else stockColorIndicator.value = StockStatus.OUT
+watch(
+  () => props.product.stock,
+  () => {
+    pickStockColorIndicator()
+  }
+)
+
+function pickStockColorIndicator(): void {
+  if (props.product.stock >= 5) stockStatus.value = StockStatus.OK
+  else if (props.product.stock > 0) stockStatus.value = StockStatus.DANGER
+  else stockStatus.value = StockStatus.OUT
+}
 </script>
 <template>
   <div
@@ -36,7 +46,7 @@ else stockColorIndicator.value = StockStatus.OUT
           <span class="col-8 fs-3">{{ product.name }}</span>
           <span
             class="bg-danger rounded justify-content-left col-4 text-light"
-            v-if="stockColorIndicator === StockStatus.OUT"
+            v-if="stockStatus === StockStatus.OUT"
             >CE PRODUIT EST HORS DE STOCK</span
           >
         </div>
@@ -55,7 +65,7 @@ else stockColorIndicator.value = StockStatus.OUT
           <li class="list-group-item bg-dark text-light py-2">
             Prix: {{ product.price }}$
           </li>
-          <li class="rounded list-group-item py-2" :class="stockColorIndicator">
+          <li class="rounded list-group-item py-2" :class="stockStatus">
             Stock: {{ product.stock }}
           </li>
         </ul>
@@ -66,6 +76,14 @@ else stockColorIndicator.value = StockStatus.OUT
             @click="productDeletionConfirmation = true"
           >
             Supprimer
+          </button></span
+        ><span>
+          <button
+            type="button"
+            class="btn btn-warning mt-5 ms-5"
+            @click="$emit('update:productToModify', product.id)"
+          >
+            Modifier
           </button></span
         >
         <div v-if="productDeletionConfirmation" class="text-danger mt-3">

@@ -4,6 +4,8 @@ import NewProductForm from "./NewProductForm.vue"
 import { type Product } from "../scripts/types"
 import { ref } from "vue"
 import SearchBar from "./SearchBar.vue"
+import ModifyProductForm from "./ModifyProductForm.vue"
+import { EMPTY_PRODUCT } from "../scripts/consts"
 
 const products = ref<Product[]>([
   {
@@ -67,6 +69,8 @@ let nextId: number = products.value.length + 1
 
 const searchString = ref<String>("")
 
+const productToModify = ref<Product>(EMPTY_PRODUCT)
+
 function addProduct(values: [string, string, number, number]): void {
   products.value.push({
     id: nextId,
@@ -81,6 +85,28 @@ function addProduct(values: [string, string, number, number]): void {
 
 function removeProduct(id: number): void {
   products.value = products.value.filter((product) => product.id !== id)
+}
+
+function updateProductToModify(id: number): void {
+  products.value.forEach((product: Product) => {
+    if (product.id === id) {
+      productToModify.value = product
+    }
+  })
+}
+
+function updateProduct(newProduct: Product): void {
+  //https://www.geeksforgeeks.org/typescript-array-foreach-method/
+  products.value.forEach((product: Product) => {
+    if (product.id === newProduct.id) {
+      product.name = newProduct.name
+      product.description = newProduct.description
+      product.price = newProduct.price
+      product.stock = newProduct.stock
+    }
+  })
+
+  productToModify.value = EMPTY_PRODUCT
 }
 
 function updateShownProducts(newSearchString: String): void {
@@ -105,12 +131,22 @@ function updateShownProducts(newSearchString: String): void {
               :product="product"
               :search-string="searchString"
               @delete:product="removeProduct($event)"
+              @update:product-to-modify="updateProductToModify($event)"
             />
           </div>
         </div>
       </div>
       <div class="row">
-        <NewProductForm @add:product="addProduct($event)"></NewProductForm>
+        <span class="col-6">
+          <NewProductForm @add:product="addProduct($event)"></NewProductForm
+        ></span>
+        <span class="col-6"> </span>
+      </div>
+      <div class="row mt-5">
+        <ModifyProductForm
+          :product="productToModify"
+          @update:product="updateProduct($event)"
+        ></ModifyProductForm>
       </div>
     </div>
   </main>
