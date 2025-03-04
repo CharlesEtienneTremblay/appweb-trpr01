@@ -4,6 +4,7 @@ import { ref } from "vue"
 
 const props = defineProps<{
   product: Product
+  searchString: String
 }>()
 
 const emits = defineEmits(["delete:product"])
@@ -18,7 +19,10 @@ else if (props.product.stock > 0) stockColorIndicator.value = StockStatus.DANGER
 else stockColorIndicator.value = StockStatus.OUT
 </script>
 <template>
-  <div class="accordion-item bg-dark">
+  <div
+    class="accordion-item bg-dark"
+    v-if="product.name.toLowerCase().includes(searchString.trim())"
+  >
     <h2 class="accordion-header">
       <button
         class="accordion-button collapsed container text-light"
@@ -29,9 +33,9 @@ else stockColorIndicator.value = StockStatus.OUT
         :aria-controls="accordionId"
       >
         <div class="row">
-          <span class="col-6 fs-3">{{ product.name }}</span>
+          <span class="col-8 fs-3">{{ product.name }}</span>
           <span
-            class="bg-danger rounded justify-content-left col-6 text-light"
+            class="bg-danger rounded justify-content-left col-4 text-light"
             v-if="stockColorIndicator === StockStatus.OUT"
             >CE PRODUIT EST HORS DE STOCK</span
           >

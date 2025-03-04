@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref } from "vue"
-import { type Product } from "../scripts/types"
 
 const emits = defineEmits(["update:shownProducts"])
 
@@ -13,7 +12,7 @@ const searchString = ref<string>()
   >
   <input
     type="text"
-    class="form-control bg-info"
+    class="form-control bg-info mb-1"
     id="searchBar"
     v-model="searchString"
     @input="emits('update:shownProducts', searchString)"
