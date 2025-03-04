@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue"
 import * as CONSTS from "../scripts/consts"
-import type { RefSymbol } from "@vue/reactivity"
 
 const emits = defineEmits(["add:product"])
 
@@ -79,7 +78,7 @@ function resetForm(): void {
       <h2 class="text-success">Ajouter un produit</h2>
       <div class="row">
         <div class="col-6">
-          <label for="newName" class="label-form">Nom</label>
+          <label for="newName" class="label-form">Nom*</label>
           <input
             type="text"
             class="form-control"
@@ -99,8 +98,8 @@ function resetForm(): void {
             v-model="newDescription"
           />
         </div>
-        <div class="col-2 mt-3">
-          <label for="newPrice" class="label-form">Prix</label>
+        <div class="col-4 mt-3">
+          <label for="newPrice" class="label-form">Prix*</label>
           <input
             type="number"
             class="form-control"
@@ -110,8 +109,8 @@ function resetForm(): void {
           />
           <div class="text-danger">{{ newPriceErrortext }}</div>
         </div>
-        <div class="col-2 mt-3">
-          <label for="newStock" class="label-form">Stock</label>
+        <div class="col-4 mt-3">
+          <label for="newStock" class="label-form">Stock*</label>
           <input
             type="number"
             class="form-control"

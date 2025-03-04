@@ -34,10 +34,9 @@ const products = ref<Product[]>([
     stock: 0
   }
 ])
+let nextId: number = products.value.length + 1
 
 function addProduct(values: [string, string, number, number]): void {
-  let nextId: number = products.value.length + 1
-
   products.value.push({
     id: nextId,
     name: values[0],
@@ -45,6 +44,8 @@ function addProduct(values: [string, string, number, number]): void {
     price: values[2],
     stock: values[3]
   })
+
+  nextId++
 }
 
 function removeProduct(id: number): void {
@@ -56,9 +57,10 @@ function removeProduct(id: number): void {
     <div class="container mt-5">
       <div class="row">
         <div class="col">
-          <div class="accordion mb-5 bg-dark" id="productsList">
-            <div>
-              <h3 class="mt-3">Produits</h3>
+          <div class="accordion mb-5 bg-dark container" id="productsList">
+            <div class="row text-center justify-content-between">
+              <ExportToCSV class="my-3" v-model="products"></ExportToCSV>
+              <span class="mt-3 fs-1">Produits</span>
             </div>
             <ProductItem
               v-for="product in products"

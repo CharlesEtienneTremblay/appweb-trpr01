@@ -25,12 +25,11 @@ else stockColorIndicator.value = StockStatus.OUT
         type="button"
         data-bs-toggle="collapse"
         :data-bs-target="accordionIdLocator"
-        accordionId
         aria-expanded="false"
         :aria-controls="accordionId"
       >
         <div class="row">
-          <span class="col-6 fs-3">{{ product.name }} ({{ product.id }})</span>
+          <span class="col-6 fs-3">{{ product.name }}</span>
           <span
             class="bg-danger rounded justify-content-left col-6 text-light"
             v-if="stockColorIndicator === StockStatus.OUT"
