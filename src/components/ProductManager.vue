@@ -7,6 +7,7 @@ import SearchBar from "./SearchBar.vue"
 import ModifyProductForm from "./ModifyProductForm.vue"
 import { EMPTY_PRODUCT } from "../scripts/consts"
 import DuplicateProductForm from "./DuplicateProductForm.vue"
+import CsvExportButton from "./CsvExportButton.vue"
 
 /*
 
@@ -109,8 +110,6 @@ function findProduct(id: number): Product {
       product = currentProduct
     }
   })
-
-  console.log(product)
   return product
 }
 
@@ -140,9 +139,7 @@ function updateShownProducts(newSearchString: String): void {
           <div class="accordion mb-5 bg-dark container" id="productsList">
             <div class="row text-center justify-content-between">
               <span class="mt-3 fs-1">Produits</span>
-              <SearchBar
-                @update:shown-products="updateShownProducts($event)"
-              ></SearchBar>
+              <SearchBar @update:shown-products="updateShownProducts($event)" />
             </div>
             <ProductItem
               v-for="product in products"
@@ -155,6 +152,7 @@ function updateShownProducts(newSearchString: String): void {
                 productToDuplicate = findProduct($event)
               "
             />
+            <div class="mt-3"><CsvExportButton :products="products" /></div>
           </div>
         </div>
       </div>
