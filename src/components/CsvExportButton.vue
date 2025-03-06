@@ -3,7 +3,6 @@
     J'ai utilisé ce site et son API pour effectuer l'exportation en fichier .csv:
     https://www.npmjs.com/package/export-to-csv
 */
-
 import { mkConfig, generateCsv, download, type CsvOutput } from "export-to-csv"
 import { type Product } from "../scripts/types"
 
@@ -15,7 +14,7 @@ const props = defineProps<{
 const csvConfig = mkConfig({
   useKeysAsHeaders: false,
   quoteCharacter: "",
-  filename: "produits_aleatoires",
+  filename: "jeux_realite_produits",
   showColumnHeaders: true,
   columnHeaders: [
     { key: "id", displayLabel: "Id" },
