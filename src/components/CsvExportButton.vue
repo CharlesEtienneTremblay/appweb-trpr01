@@ -1,20 +1,24 @@
 <script setup lang="ts">
-import {
-  mkConfig,
-  generateCsv,
-  download,
-  type CsvOutput,
-  type ConfigOptions
-} from "export-to-csv"
+import { mkConfig, generateCsv, download, type CsvOutput } from "export-to-csv"
 import { type Product } from "../scripts/types"
 
 const props = defineProps<{
   products: Product[]
 }>()
-const csvConfig /*:WithDefaults<ConfigOptions>*/ = mkConfig({
-  useKeysAsHeaders: true,
-  title: "Produits",
-  filename: "produits_aleatoires"
+
+// Le type de cette constante n'existe pas et ne peut donc pas être déclaré.
+const csvConfig = mkConfig({
+  useKeysAsHeaders: false,
+  quoteCharacter: "",
+  filename: "produits_aleatoires",
+  showColumnHeaders: true,
+  columnHeaders: [
+    { key: "id", displayLabel: "Id" },
+    { key: "name", displayLabel: "Nom" },
+    { key: "description", displayLabel: "Description" },
+    { key: "price", displayLabel: "Prix" },
+    { key: "stock", displayLabel: "Stock" }
+  ]
 })
 
 function exportAsCSV(): void {
