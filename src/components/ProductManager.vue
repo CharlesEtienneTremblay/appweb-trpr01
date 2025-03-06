@@ -13,9 +13,7 @@ import CsvExportButton from "./CsvExportButton.vue"
 
   À FAIRE:
 
-1. Déploiement
 3. README.md
-4. Duplication
 5. CSV
 6. Excel
 
@@ -24,57 +22,57 @@ import CsvExportButton from "./CsvExportButton.vue"
 const products = ref<Product[]>([
   {
     id: 1,
-    name: "Comédie",
-    description: "Un masque de comédie avec une aura étrange.",
+    name: "Estus",
+    description: "Un nécessaire pour toute aventure!",
     price: 10.0,
     stock: 5
   },
   {
     id: 2,
     name: "Pyrovision",
-    description: "Regarder le monde avec de nouveaux yeux!",
+    description: "Voyez le monde avec de nouveaux yeux!",
     price: 24.0,
     stock: 10
   },
   {
     id: 3,
-    name: "Pomme",
-    description: "Pomme.",
+    name: "Knockout Stout",
+    description: "Une bière qui va vous mettre à terre!",
     price: 24.0,
     stock: 99
   },
   {
     id: 4,
     name: "Ghostly Gibus",
-    description: "Le plus stylé des chapeux gratuits!",
+    description: "La gratuité la plus stylée!",
     price: 0.0,
     stock: 3
   },
   {
     id: 5,
-    name: "The Darkhold",
-    description: "Un livre de magie pour débutants!",
+    name: "Chronovium",
+    description: "Du temps cristallisé.",
     price: 1000.34,
     stock: 1
   },
   {
     id: 6,
-    name: "Le sandwich parfait",
-    description: "Goût du paradis",
+    name: "Vaisseau",
+    description: "Un vaisseau pour l'exploration spatiale.",
     price: 9999999.99,
     stock: 0
   },
   {
     id: 7,
-    name: "Le 'Produit'",
-    description: "Lorem ipsum",
+    name: "Comédie",
+    description: "Un masque de comédie.",
     price: 24.0,
     stock: 0
   },
   {
     id: 8,
-    name: "Inconnu",
-    description: "On va vous payer pour le prendre!",
+    name: "Graîne de ronce sombre",
+    description: "La graîne d'une plante vicieuse que l'on veut se débarasser.",
     price: 0.0,
     stock: 1
   }
@@ -138,7 +136,6 @@ function updateShownProducts(newSearchString: String): void {
         <div class="col">
           <div class="accordion mb-5 bg-dark container" id="productsList">
             <div class="row text-center justify-content-between">
-              <span class="mt-3 fs-1">Produits</span>
               <SearchBar @update:shown-products="updateShownProducts($event)" />
             </div>
             <ProductItem

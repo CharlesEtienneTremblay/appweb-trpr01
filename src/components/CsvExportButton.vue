@@ -1,4 +1,9 @@
 <script setup lang="ts">
+/*
+    J'ai utilisé ce site et son API pour effectuer l'exportation en fichier .csv:
+    https://www.npmjs.com/package/export-to-csv
+*/
+
 import { mkConfig, generateCsv, download, type CsvOutput } from "export-to-csv"
 import { type Product } from "../scripts/types"
 

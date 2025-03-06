@@ -126,6 +126,8 @@ function pickStockColorIndicator(): void {
   </div>
 </template>
 <style scoped>
+/* J'ai utilisé ce site pour faire ce code css:
+  https://stackoverflow.com/questions/66231936/change-accordion-button-collapsed-icon-color-in-bootstrap-5 */
 .accordion-button {
   background: rgb(33, 37, 41, 255);
 }

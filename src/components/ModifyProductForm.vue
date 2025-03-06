@@ -73,7 +73,8 @@ function validateForm(): boolean {
   return isValid
 }
 
-//https://www.geeksforgeeks.org/how-to-convert-string-to-number-in-typescript/
+// J'ai utilisé ce site pour trouver comment transformer un string en number:
+// https://www.geeksforgeeks.org/how-to-convert-string-to-number-in-typescript/
 function sendForm(): void {
   if (validateForm()) {
     emits.call("update:product", "update:product", {
