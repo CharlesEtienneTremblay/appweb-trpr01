@@ -6,6 +6,19 @@ import { ref } from "vue"
 import SearchBar from "./SearchBar.vue"
 import ModifyProductForm from "./ModifyProductForm.vue"
 import { EMPTY_PRODUCT } from "../scripts/consts"
+import DuplicateProductForm from "./DuplicateProductForm.vue"
+
+/*
+
+  À FAIRE:
+
+1. Déploiement
+3. README.md
+4. Duplication
+5. CSV
+6. Excel
+
+*/
 
 const products = ref<Product[]>([
   {
@@ -70,6 +83,7 @@ let nextId: number = products.value.length + 1
 const searchString = ref<String>("")
 
 const productToModify = ref<Product>(EMPTY_PRODUCT)
+const productToDuplicate = ref<Product>(EMPTY_PRODUCT)
 
 function addProduct(values: [string, string, number, number]): void {
   products.value.push({
@@ -87,12 +101,17 @@ function removeProduct(id: number): void {
   products.value = products.value.filter((product) => product.id !== id)
 }
 
-function updateProductToModify(id: number): void {
-  products.value.forEach((product: Product) => {
-    if (product.id === id) {
-      productToModify.value = product
+function findProduct(id: number): Product {
+  let product: Product = EMPTY_PRODUCT
+
+  products.value.forEach((currentProduct: Product) => {
+    if (currentProduct.id === id) {
+      product = currentProduct
     }
   })
+
+  console.log(product)
+  return product
 }
 
 function updateProduct(newProduct: Product): void {
@@ -116,7 +135,7 @@ function updateShownProducts(newSearchString: String): void {
 <template>
   <main>
     <div class="container mt-5">
-      <div class="row">
+      <div class="row" id="productsDiv">
         <div class="col">
           <div class="accordion mb-5 bg-dark container" id="productsList">
             <div class="row text-center justify-content-between">
@@ -131,18 +150,28 @@ function updateShownProducts(newSearchString: String): void {
               :product="product"
               :search-string="searchString"
               @delete:product="removeProduct($event)"
-              @update:product-to-modify="updateProductToModify($event)"
+              @update:product-to-modify="productToModify = findProduct($event)"
+              @update:product-to-duplicate="
+                productToDuplicate = findProduct($event)
+              "
             />
           </div>
         </div>
       </div>
-      <div class="row">
+      <div class="row" id="addFormsDiv">
         <span class="col-6">
           <NewProductForm @add:product="addProduct($event)"></NewProductForm
         ></span>
-        <span class="col-6"> </span>
+        <span class="col-6">
+          <DuplicateProductForm
+            :product="productToDuplicate"
+            @add:product="
+              addProduct($event), (productToDuplicate = EMPTY_PRODUCT)
+            "
+          ></DuplicateProductForm>
+        </span>
       </div>
-      <div class="row mt-5">
+      <div class="row mt-5" id="modifyFormDiv">
         <ModifyProductForm
           :product="productToModify"
           @update:product="updateProduct($event)"

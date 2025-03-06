@@ -77,7 +77,7 @@ function resetForm(): void {
     <fieldset class="border px-3 py-3 border-success rounded">
       <h2 class="text-success">Ajouter un produit</h2>
       <div class="row">
-        <div class="col-6">
+        <div class="col-6" id="name">
           <label for="newName" class="label-form">Nom*</label>
           <input
             type="text"
@@ -89,7 +89,7 @@ function resetForm(): void {
             {{ newNameErrortext }}
           </div>
         </div>
-        <div class="col-6">
+        <div class="col-6" id="description">
           <label for="newDescription" class="label-form">Description</label>
           <input
             type="text"
@@ -98,7 +98,7 @@ function resetForm(): void {
             v-model="newDescription"
           />
         </div>
-        <div class="col-4 mt-3">
+        <div class="col-6 mt-3" id="price">
           <label for="newPrice" class="label-form">Prix*</label>
           <input
             type="number"
@@ -109,7 +109,7 @@ function resetForm(): void {
           />
           <div class="text-danger">{{ newPriceErrortext }}</div>
         </div>
-        <div class="col-4 mt-3">
+        <div class="col-6 mt-3" id="stock">
           <label for="newStock" class="label-form">Stock*</label>
           <input
             type="number"
@@ -121,7 +121,7 @@ function resetForm(): void {
             {{ newStockErrortext }}
           </div>
         </div>
-        <div>
+        <div id="sendButton">
           <button
             type="button"
             class="btn btn-success mt-3"

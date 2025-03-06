@@ -7,7 +7,11 @@ const props = defineProps<{
   searchString: String
 }>()
 
-const emits = defineEmits(["delete:product", "update:productToModify"])
+const emits = defineEmits([
+  "delete:product",
+  "update:productToModify",
+  "update:productToDuplicate"
+])
 
 const accordionId: string = "accordion" + props.product.id
 const accordionIdLocator: string = "#" + accordionId
@@ -84,6 +88,15 @@ function pickStockColorIndicator(): void {
             @click="$emit('update:productToModify', product.id)"
           >
             Modifier
+          </button></span
+        >
+        <span>
+          <button
+            type="button"
+            class="btn btn-info mt-5 ms-5"
+            @click="$emit('update:productToDuplicate', product.id)"
+          >
+            Dupliquer
           </button></span
         >
         <div v-if="productDeletionConfirmation" class="text-danger mt-3">
