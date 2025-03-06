@@ -35,7 +35,9 @@ function pickStockColorIndicator(): void {
 <template>
   <div
     class="accordion-item bg-dark"
-    v-if="product.name.toLowerCase().includes(searchString.trim())"
+    v-if="
+      product.name.toLowerCase().includes(searchString.trim().toLowerCase())
+    "
   >
     <h2 class="accordion-header">
       <button
