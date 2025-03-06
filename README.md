@@ -16,4 +16,4 @@ J'ai utilisé les ressources suivantes pour compléter mon travail. Elles sont a
 
 ## Liens
 - **Repositoire Github:** https://github.com/CharlesEtienneTremblay/appweb-trpr01
-- **Site déployé:** 
+- **Site déployé:** https://charlesetiennetremblay.github.io/appweb-trpr01/

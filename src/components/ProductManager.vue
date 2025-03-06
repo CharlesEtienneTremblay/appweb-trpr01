@@ -9,16 +9,6 @@ import { EMPTY_PRODUCT } from "../scripts/consts"
 import DuplicateProductForm from "./DuplicateProductForm.vue"
 import CsvExportButton from "./CsvExportButton.vue"
 
-/*
-
-  À FAIRE:
-
-3. README.md
-5. CSV
-6. Excel
-
-*/
-
 const products = ref<Product[]>([
   {
     id: 1,
@@ -134,6 +124,8 @@ function updateShownProducts(newSearchString: String): void {
     <div class="container mt-5">
       <div class="row" id="productsDiv">
         <div class="col">
+          <!-- J'ai utilisé ce site pour faire l'accordéon ci-dessous:
+           https://getbootstrap.com/docs/5.3/components/accordion/#how-it-works -->
           <div class="accordion mb-5 bg-dark container" id="productsList">
             <div class="row text-center justify-content-between">
               <SearchBar @update:shown-products="updateShownProducts($event)" />
