@@ -1,4 +1,5 @@
-# appweb-trpr01-CET
+# appweb-trpr01
+*Nom:* Travail Pratique 1
 *Auteur:* Charles-Étienne Tremblay
 
 ## Description
