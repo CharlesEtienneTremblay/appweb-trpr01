@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue"
 import * as CONSTS from "../scripts/consts"
+import { validateTextValue, validateNumberValue } from "../scripts/validation"
 
 const emits = defineEmits(["add:product"])
 
@@ -12,36 +13,24 @@ const newNameErrortext = ref<string>("")
 const newPriceErrortext = ref<string>("")
 const newStockErrortext = ref<string>("")
 
-function validateName(): boolean {
-  return newName.value.trim() === ""
-}
-
-function validatePrice(): boolean {
-  return newPrice.value.toString() === "" || newPrice.value < 0
-}
-
-function validateStock(): boolean {
-  return newStock.value.toString() === "" || newStock.value < 0
-}
-
 function validateForm(): boolean {
   let isValid: boolean = true
 
-  if (validateName()) {
+  if (validateTextValue(newName.value)) {
     isValid = false
     newNameErrortext.value = CONSTS.INVALID_NEW_NAME_MESSAGE
   } else {
     newNameErrortext.value = ""
   }
 
-  if (validatePrice()) {
+  if (validateNumberValue(newPrice.value)) {
     isValid = false
     newPriceErrortext.value = CONSTS.INVALID_NEW_PRICE_MESSAGE
   } else {
     newPriceErrortext.value = ""
   }
 
-  if (validateStock()) {
+  if (validateNumberValue(newStock.value)) {
     isValid = false
     newStockErrortext.value = CONSTS.INVALID_NEW_STOCK_MESSAGE
   } else {
